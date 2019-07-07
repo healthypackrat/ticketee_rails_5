@@ -20,7 +20,8 @@ module Ticketee
       g.assets false
       g.helper false
       g.test_framework :rspec,
-        controller_specs: false
+        controller_specs: false,
+        view_specs: false
     end
   end
 end
