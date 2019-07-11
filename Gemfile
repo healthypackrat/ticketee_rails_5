@@ -72,3 +72,5 @@ gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.5'
 gem 'simple_form', '~> 4.1'
 
 gem 'devise', '~> 4.6', '>= 4.6.2'
+
+gem 'pundit', '~> 2.0', '>= 2.0.1'
