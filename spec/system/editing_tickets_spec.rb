@@ -7,7 +7,10 @@ RSpec.feature "Users can edit existing tickets", type: :system do
     FactoryBot.create(:ticket, project: project, author: author)
   end
 
-  background do
+  before do
+    assign_role!(author, :viewer, project)
+    login_as(author)
+
     visit project_ticket_path(project, ticket)
     click_link "Edit Ticket"
   end
