@@ -4,6 +4,9 @@ RSpec.feature "Users can only see the appropriate links", type: :system do
   given(:project) { FactoryBot.create(:project) }
   given(:user) { FactoryBot.create(:user) }
   given(:admin) { FactoryBot.create(:user, :admin) }
+  given(:ticket) do
+    FactoryBot.create(:ticket, project: project, author: user)
+  end
 
   context "anonymous users" do
     scenario "cannot see the New Project link" do
@@ -37,6 +40,11 @@ RSpec.feature "Users can only see the appropriate links", type: :system do
       visit project_path(project)
       expect(page).not_to have_link "New Ticket"
     end
+
+    scenario "cannot see the Edit Ticket link" do
+      visit project_ticket_path(project, ticket)
+      expect(page).not_to have_link "Edit Ticket"
+    end
   end
 
   context "admin users" do
@@ -60,6 +68,11 @@ RSpec.feature "Users can only see the appropriate links", type: :system do
     scenario "can see the New Ticket link" do
       visit project_path(project)
       expect(page).to have_link "New Ticket"
+    end
+
+    scenario "can see the Edit Ticket link" do
+      visit project_ticket_path(project, ticket)
+      expect(page).to have_link "Edit Ticket"
     end
   end
 end
